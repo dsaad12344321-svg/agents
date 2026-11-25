@@ -19,7 +19,7 @@ A repository of independent specialist agents that collaborate on future product
 
 ## How collaboration works
 
-Read [the Design Division charter](teams/design-division.md) and [team workflows](teams/team-workflows.md) before running a project.
+Read [the Design Division charter](teams/design-division.md), [team workflows](teams/team-workflows.md), and the [orchestrator prompt](teams/orchestrator-prompt.md) before running a project.
 
 1. The project brief and constraints are recorded.
 2. Each relevant agent gives an independent position before seeing the others' conclusions.
@@ -31,13 +31,12 @@ Agents are specialist perspectives, not autonomous human participants. Their dis
 
 ## Repository structure
 
-```text
-agents/<agent-id>/SKILL.md
-teams/design-division.md
-teams/team-workflows.md
-README.md
-CONTRIBUTING.md
-```
+    agents/<agent-id>/SKILL.md
+    teams/design-division.md
+    teams/team-workflows.md
+    teams/orchestrator-prompt.md
+    README.md
+    CONTRIBUTING.md
 
 ## Operating principles
 
