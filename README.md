@@ -29,6 +29,17 @@ Read [the Design Division charter](teams/design-division.md), [team workflows](t
 
 Agents are specialist perspectives, not autonomous human participants. Their discussion is orchestrated by the calling agent or workflow; no agent should claim that real users were interviewed, analytics were inspected, or tests passed unless evidence was actually supplied.
 
+
+## Run the team through an API
+
+The repository includes a Vercel-ready API that invokes the specialist role files through an OpenAI-compatible model provider:
+
+- `POST /api/design-team` — independent reviews, cross-examination, and a consolidated design decision.
+- `POST /api/agents/{agentId}` — invoke one specialist directly.
+- `GET /api/design-team` — health check.
+
+See [API setup, deployment, request examples, and security](API.md). Configure `OPENAI_API_KEY` and (recommended) `DESIGN_TEAM_API_KEY` in the deployment environment before using the service. Full-team debate makes 21 model requests when all ten agents are selected, so provider usage and cost should be expected.
+
 ## Repository structure
 
     agents/<agent-id>/SKILL.md
