@@ -1,0 +1,11 @@
+{
+  "name": "design-team-orchestrator",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "API-powered orchestration for the Product Design Agent Collective",
+  "engines": { "node": ">=20" },
+  "scripts": { "dev": "vercel dev", "deploy": "vercel --prod" },
+  "dependencies": {},
+  "devDependencies": { "vercel": "^48.0.0" }
+}
