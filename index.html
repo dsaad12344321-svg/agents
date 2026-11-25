@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101827"><title>Design Team Orchestrator</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1220;--panel:#121d30;--line:#26364e;--muted:#9aabc2;--text:#edf4ff;--accent:#8bb8ff;--green:#42c99a;--amber:#f4c56a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 85% 0%,#1b3151 0,transparent 42%),var(--bg);color:var(--text);font:16px/1.7 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:980px;margin:0 auto;padding:64px 24px}.eyebrow{color:var(--accent);font-size:13px;font-weight:700;letter-spacing:.08em}
+h1{font-size:clamp(32px,6vw,54px);line-height:1.15;margin:14px 0}p{color:var(--muted)}.lead{font-size:18px;max-width:720px}
+.panel{background:rgba(18,29,48,.9);border:1px solid var(--line);border-radius:18px;padding:24px;margin-top:28px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}.status{display:inline-flex;align-items:center;gap:9px;font-weight:700}.dot{width:9px;height:9px;border-radius:50%;background:var(--amber)}.dot.ok{background:var(--green)}
+code{direction:ltr;unicode-bidi:embed;background:#0b1424;border:1px solid var(--line);padding:3px 7px;border-radius:6px;color:#c9dcff}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:16px}.endpoint{padding:16px;border:1px solid var(--line);border-radius:12px;background:#0d1728}.method{color:var(--green);font-size:12px;font-weight:800;direction:ltr;display:block;text-align:left}
+a{color:var(--accent)}button{border:1px solid #45658e;background:#1c3555;color:white;border-radius:9px;padding:10px 16px;font:inherit;cursor:pointer}button:hover{background:#29496f}
+small{color:var(--muted)}footer{margin-top:32px;color:var(--muted);font-size:13px}
+</style></head>
+<body><main>
+<div class="eyebrow">PRODUCT DESIGN AGENT COLLECTIVE</div>
+<h1>فريق التصميم يعمل من هنا.</h1>
+<p class="lead">مركز تشغيل واجهات API لفريق من عشرة وكلاء متخصصين. كل وكيل يقدم منظوراً مستقلاً، ويمكن جمع الآراء ومناقشتها لإنتاج قرار تصميم موحّد مع توضيح نقاط الاختلاف.</p>
+<section class="panel">
+<div class="row"><div><strong>حالة الخدمة</strong><div id="status" class="status"><span class="dot"></span><span>جارٍ فحص الخدمة…</span></div><small id="details">يتم فحص نقطة الصحة على نفس النطاق.</small></div><button id="refresh" type="button">إعادة الفحص</button></div>
+</section>
+<section class="panel"><h2>واجهات API</h2><div class="grid">
+<div class="endpoint"><span class="method">GET</span><strong>فحص الخدمة</strong><p><code>/api/design-team</code></p></div>
+<div class="endpoint"><span class="method">POST</span><strong>تشغيل فريق التصميم</strong><p><code>/api/design-team</code></p></div>
+<div class="endpoint"><span class="method">POST</span><strong>تشغيل وكيل منفرد</strong><p><code>/api/agents/{agentId}</code></p></div>
+</div></section>
+<section class="panel"><h2>كيف تستخدم الفريق؟</h2><p>أرسل وصف المنتج والجمهور والهدف والقيود التقنية والأدلة المتاحة إلى واجهة <code>POST /api/design-team</code>. يمكن اختيار وكلاء محددين أو تشغيل جولة نقاش بين التخصصات.</p><p>الاستدعاءات المحمية تتطلب ترويسة <code>Authorization: Bearer YOUR_API_KEY</code>. احتفظ بالمفتاح على الخادم ولا تضعه في كود المتصفح.</p><a href="https://github.com/dsaad12344321-svg/agents" target="_blank" rel="noreferrer">عرض المستودع على GitHub</a> · <a href="/API.md">دليل API</a></section>
+<footer>Design Team Orchestrator · واجهة تعريفية للخدمة وليست لوحة محادثات أو محرر مشاريع.</footer>
+</main>
+<script>
+async function check(){const s=document.getElementById('status'),d=document.getElementById('details');s.innerHTML='<span class="dot"></span><span>جارٍ الفحص…</span>';try{const r=await fetch('/api/design-team',{headers:{accept:'application/json'}});const data=await r.json();if(!r.ok)throw new Error(data.error||('HTTP '+r.status));const ok=data.status==='ready';s.innerHTML='<span class="dot '+(ok?'ok':'')+'"></span><span>'+(ok?'الخدمة متاحة':'الخدمة تحتاج إعداداً')+'</span>';d.textContent='configured: '+String(data.configured)+' · authRequired: '+String(data.authRequired);}catch(e){s.innerHTML='<span class="dot"></span><span>تعذّر فحص الخدمة</span>';d.textContent=e.message;}}
+document.getElementById('refresh').addEventListener('click',check);check();
+</script></body></html>
